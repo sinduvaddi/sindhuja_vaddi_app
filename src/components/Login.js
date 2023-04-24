@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import '.././style.css';
+import React, { useState, useEffect } from "react";
+import ".././style.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const inititalValues = { email: '', password: '' };
+  const inititalValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(inititalValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +18,9 @@ export default function Login() {
     e.preventDefault();
     setFormErrors(validateForm(formValues));
     setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0) {
-      console.log('Navigate to Dashboad');
+    if (isSubmit && Object.keys(formErrors).length === 0) {
+      console.log("Navigate to Dashboad", formErrors);
+      navigate("/Dashboard");
     }
   };
 
@@ -31,14 +34,14 @@ export default function Login() {
   const validateForm = (formValues) => {
     const errors = {};
     if (!formValues.email) {
-      errors.email = 'Email is required!';
+      errors.email = "Email is required!";
     }
     if (!formValues.password) {
-      errors.password = 'Password is required!';
+      errors.password = "Password is required!";
     } else if (formValues.password.length < 6) {
-      errors.password = 'Password must be more than 6 characters';
+      errors.password = "Password must be more than 6 characters";
     } else if (formValues.password.length > 10) {
-      errors.password = 'Password cannot exceed more than 10 characters';
+      errors.password = "Password cannot exceed more than 10 characters";
     }
     return errors;
   };
@@ -84,3 +87,7 @@ export default function Login() {
     </React.Fragment>
   );
 }
+
+// queries
+// 1. useEffect method throwing errors(Break loop by using diff variable)
+// 2.
