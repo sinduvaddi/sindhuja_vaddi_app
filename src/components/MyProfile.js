@@ -20,7 +20,7 @@ export default function MyProfile() {
     });
   };
 
-  const handleRemove = (contactID) => {
+  const removeContact = (contactID) => {
     store.dispatch({
       type: "contactRemoved",
       payload: {
@@ -37,7 +37,7 @@ export default function MyProfile() {
   return (
     <React.Fragment>
       <div>
-        <p>Your contacts List form 2</p>
+        <p>Your contacts List form 7</p>
         <form onSubmit={handleSubmit(createContact)}>
           <h1>Add contact</h1>
           <div>
@@ -73,7 +73,9 @@ export default function MyProfile() {
                   Name: {contact.contactName} Mobile Number:{" "}
                   {contact.mobileNumber}
                 </p>
-
+                <button onClick={() => removeContact(contact.id)}>
+                  Remove Contact
+                </button>
                 <hr />
               </div>
             );
